@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="dashloader_avplayer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YSR-RT-ozB" customClass="PlayView" customModule="dashloader_avplayer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="414" height="233"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="YSR-RT-ozB" secondAttribute="height" multiplier="16:9" id="2PL-yy-dPg"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mcb-tc-4pH" userLabel="button1">
+                                <rect key="frame" x="59" y="317" width="80" height="30"/>
+                                <state key="normal" title="1. HLS MAX"/>
+                                <connections>
+                                    <action selector="button1Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KNr-fg-SMv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QCm-S4-Uud" userLabel="button2">
+                                <rect key="frame" x="59" y="357" width="157" height="30"/>
+                                <state key="normal" title="2. HLS Preview &lt; 10.0s"/>
+                                <connections>
+                                    <action selector="button2Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="puo-29-bPA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OPN-im-W50" userLabel="button3">
+                                <rect key="frame" x="59" y="397" width="94" height="30"/>
+                                <state key="normal" title="3. HLS Merge"/>
+                                <connections>
+                                    <action selector="button3Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hc3-H9-kmm"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gk-EW-aFc" userLabel="button4">
+                                <rect key="frame" x="59" y="437" width="58" height="30"/>
+                                <state key="normal" title="4. DASH"/>
+                                <connections>
+                                    <action selector="button4Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Krh-1o-YAk"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="YSR-RT-ozB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="4V8-h4-F42"/>
+                            <constraint firstAttribute="trailing" secondItem="YSR-RT-ozB" secondAttribute="trailing" id="4h0-TU-dr7"/>
+                            <constraint firstItem="QCm-S4-Uud" firstAttribute="top" secondItem="Mcb-tc-4pH" secondAttribute="bottom" constant="10" id="7ls-lJ-C5b"/>
+                            <constraint firstItem="YSR-RT-ozB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="MxA-qr-f3d"/>
+                            <constraint firstItem="OPN-im-W50" firstAttribute="leading" secondItem="QCm-S4-Uud" secondAttribute="leading" id="R75-eD-KqT"/>
+                            <constraint firstItem="QCm-S4-Uud" firstAttribute="leading" secondItem="Mcb-tc-4pH" secondAttribute="leading" id="TCu-iy-ucn"/>
+                            <constraint firstItem="OPN-im-W50" firstAttribute="top" secondItem="QCm-S4-Uud" secondAttribute="bottom" constant="10" id="XPv-sV-NfB"/>
+                            <constraint firstItem="0gk-EW-aFc" firstAttribute="top" secondItem="OPN-im-W50" secondAttribute="bottom" constant="10" id="i40-yD-4SJ"/>
+                            <constraint firstItem="Mcb-tc-4pH" firstAttribute="top" secondItem="YSR-RT-ozB" secondAttribute="bottom" constant="20" id="v66-rq-W54"/>
+                            <constraint firstItem="Mcb-tc-4pH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="59" id="yf1-R0-e5q"/>
+                            <constraint firstItem="0gk-EW-aFc" firstAttribute="leading" secondItem="OPN-im-W50" secondAttribute="leading" id="zbG-RB-LKZ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="button1" destination="Mcb-tc-4pH" id="Slu-kp-LTK"/>
+                        <outlet property="button2" destination="QCm-S4-Uud" id="cHn-ID-CMT"/>
+                        <outlet property="button3" destination="OPN-im-W50" id="orR-rA-B3t"/>
+                        <outlet property="button4" destination="0gk-EW-aFc" id="iZ4-l0-BAP"/>
+                        <outlet property="playView" destination="YSR-RT-ozB" id="yQo-9Z-ofO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="70"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
