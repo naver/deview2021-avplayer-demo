@@ -27,6 +27,7 @@ class ViewController: UIViewController {
 
     var delegate: CustomAssetDelegate?
 
+    // 1. HLS 화질제한 재생
     @IBAction func button1Tapped(_ sender: Any) {
         if player.rate != .zero { stop() }
 
@@ -47,6 +48,7 @@ class ViewController: UIViewController {
         }
     }
 
+    // 2. HLS Media 길이제한
     @IBAction func button2Tapped(_ sender: Any) {
         if player.rate != .zero { stop() }
 
@@ -67,6 +69,7 @@ class ViewController: UIViewController {
         }
     }
 
+    // 3. HLS Media 길이제한 & 미디어 합성
     @IBAction func button3Tapped(_ sender: Any) {
         if player.rate != .zero { stop() }
 
@@ -87,10 +90,26 @@ class ViewController: UIViewController {
         }
     }
 
+    // 4. DASH 재생하기
     @IBAction func button4Tapped(_ sender: Any) {
         if player.rate != .zero { stop() }
 
-        playDASHVideo()
+        guard let dashURL = DemoAppConfiguration.Path.dash.toURL else { return }
+
+        // 1. scheme 변경 -> custom scheme
+        let url = dashURL
+            .change(scheme: "cdash")
+            .tempM3U8
+        let urlAsset = AVURLAsset(url: url)
+
+        // 2. CustomAssetDelegate(AVAssetResourceLoaderDelegate 설정)
+        let customAssetDelegate = CustomAssetDelegate(loader: DashToHLSLoader())
+        self.delegate = customAssetDelegate
+        urlAsset.resourceLoader.setDelegate(customAssetDelegate,
+                                            queue: DispatchQueue.global(qos: .utility))
+        urlAsset.loadValuesAsynchronously(forKeys: ["playable", "duration"]) { [weak self] in
+            self?.play(playItem: AVPlayerItem(asset: urlAsset))
+        }
     }
 
     private func stop() {
@@ -111,45 +130,6 @@ class ViewController: UIViewController {
         }
         player.replaceCurrentItem(with: playItem)
         player.play()
-    }
-
-    // 1. Play normal-HLS Video
-    func playHLSVideo() {
-        guard let hlsURL = DemoAppConfiguration.Path.hls.toURL else { return }
-
-        // 1. scheme 변경 -> custom scheme
-        let url = hlsURL
-            .change(scheme: "chls")
-        let urlAsset = AVURLAsset(url: url)
-
-        // 2. CustomAssetDelegate(AVAssetResourceLoaderDelegate 설정)
-        let customAssetDelegate = CustomAssetDelegate(loader: HLSRestrictResolutionCustomLoader())
-        self.delegate = customAssetDelegate
-        urlAsset.resourceLoader.setDelegate(customAssetDelegate,
-                                            queue: DispatchQueue.global(qos: .utility))
-        urlAsset.loadValuesAsynchronously(forKeys: ["playable", "duration"]) { [weak self] in
-            self?.play(playItem: AVPlayerItem(asset: urlAsset))
-        }
-    }
-
-    // 2. Play DASH Video
-    func playDASHVideo() {
-        guard let dashURL = DemoAppConfiguration.Path.dash.toURL else { return }
-
-        // 1. scheme 변경 -> custom scheme
-        let url = dashURL
-            .change(scheme: "cdash")
-            .tempM3U8
-        let urlAsset = AVURLAsset(url: url)
-
-        // 2. CustomAssetDelegate(AVAssetResourceLoaderDelegate 설정)
-        let customAssetDelegate = CustomAssetDelegate(loader: DashToHLSLoader())
-        self.delegate = customAssetDelegate
-        urlAsset.resourceLoader.setDelegate(customAssetDelegate,
-                                            queue: DispatchQueue.global(qos: .utility))
-        urlAsset.loadValuesAsynchronously(forKeys: ["playable", "duration"]) { [weak self] in
-            self?.play(playItem: AVPlayerItem(asset: urlAsset))
-        }
     }
 }
 
