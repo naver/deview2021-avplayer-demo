@@ -14,3 +14,6 @@ CustomResourceLoader에 대한 예제는 네 가지로 구성되었습니다.
 
 ### 4. DASH to HLS 재생
 - DashToHLSLoader.swift (DashToHLSLoader)
+
+## Session
+[DEVIEW 2021](https://deview.kr/2021/sessions/420)
